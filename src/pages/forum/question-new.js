@@ -18,6 +18,7 @@ import {
   IonBackButton,
   IonButtons,
 } from "@ionic/react";
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from "react";
 import { createQuestion } from "../../controllers/question";
 import { findTopic } from "../../controllers/topic";
@@ -28,9 +29,10 @@ import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 
 const QuestionNew = () => {
+  const history = useHistory();
   const [topicList, setTopicList] = useState([]);
   useEffect(() => {
-    findTopic().then((data) => {
+    findTopic("all").then((data) => {
       setTopicList(data);
     });
   }, []);
@@ -49,7 +51,8 @@ const QuestionNew = () => {
     data.append("new_topic", new_topic);
     createQuestion(data).then((res) => {
       if (res.status === "success") {
-        window.location.href = "/forum";
+        history.push('/forum');
+        // window.location.href = "/forum";
       }
       if (res.status === "fail") {
         alert(res.message);

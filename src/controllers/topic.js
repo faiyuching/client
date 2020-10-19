@@ -2,9 +2,9 @@ const axios = require('axios');
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.token}`;
 
-const findTopic = () => {
+const findTopic = (filter) => {
   return axios({
-    url: `/api/topic`,
+    url: `/api/topic?filter=${filter}`,
     method: "get",
   })
     .then((res) => {

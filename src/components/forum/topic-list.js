@@ -12,13 +12,20 @@ import React, { useEffect, useState } from "react";
 import TopicItem from "./topic-item";
 import { findTopic } from "../../controllers/topic";
 import { NavLink } from "react-router-dom";
-const TopicList = () => {
+const TopicList = (props) => {
   const [topicList, setTopicList] = useState([]);
   useEffect(() => {
-    findTopic().then((data) => {
+    findTopic(props.filter).then((data) => {
       setTopicList(data);
     });
-  }, []);
+  }, [props.filter]);
+  if (topicList.length === 0) {
+    return (
+      <IonCard>
+        <IonCardContent>no topics found</IonCardContent>
+      </IonCard>
+    );
+  }
   return (
     <IonCard>
       <IonCardHeader>

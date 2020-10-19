@@ -26,7 +26,7 @@ import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 
-const QuestionNew = () => {
+const QuestionUpdate = () => {
   const auth = useContext(AuthContext);
   const questionId = useParams().id;
   const [content, setContent] = useState("");
@@ -155,4 +155,4 @@ const QuestionNew = () => {
   );
 };
 
-export default QuestionNew;
+export default QuestionUpdate;

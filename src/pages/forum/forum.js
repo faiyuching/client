@@ -52,7 +52,7 @@ const Forum = (props) => {
               size-lg="3"
               hidden={auth.screenSize === "xs" || auth.screenSize === "sm"}
             >
-              <TopicList />
+              <TopicList filter="all"/>
             </IonCol>
             <IonCol size-xs="12" size-sm="12" size-md="7" size-lg="7">
               {topic && <TopicBanner id={topic} />}
