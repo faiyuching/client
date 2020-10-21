@@ -26,18 +26,20 @@ const TopicList = (props) => {
       </IonCardHeader>
       <IonCardContent>
         <IonList>
-          <NavLink to={"/forum"}>
+          <IonItem href={"/forum"}>
+            <IonLabel>全部</IonLabel>
+          </IonItem>
+          {topics && topics.length > 0 ? (
+            topics.map((topic) => {
+              return (
+                <TopicItem key={topic._id} id={topic._id} name={topic.name} />
+              );
+            })
+          ) : (
             <IonItem>
-              <IonLabel>全部</IonLabel>
+              <IonLabel>no topics found</IonLabel>
             </IonItem>
-          </NavLink>
-          {topics && topics.length > 0
-            ? topics.map((topic) => {
-                return (
-                  <TopicItem key={topic._id} id={topic._id} name={topic.name} />
-                );
-              })
-            : "Loading..."}
+          )}
         </IonList>
         <NavLink to="/new/topic">
           <IonButton fill="clear">新建话题</IonButton>

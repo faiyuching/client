@@ -18,27 +18,31 @@ const QuestionList = (props) => {
   }, [props.filter, props.id]);
   return (
     <>
-      {questions && questions.length > 0
-        ? questions.map((question) => {
-            return (
-              <IonCard key={question._id} href={`/question/${question._id}`}>
-                <IonCardHeader>
-                  <IonCardSubtitle>{question.creator.username}</IonCardSubtitle>
-                  <IonCardTitle>{question.title}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  {question.content.length > 150
-                    ? question.content.slice(0, 150) + "......"
-                    : question.content}
-                </IonCardContent>
-                <QuestionListCount
-                  questionId={question._id}
-                  questionLike={question.like.length}
-                />
-              </IonCard>
-            );
-          })
-        : "Loading"}
+      {questions && questions.length > 0 ? (
+        questions.map((question) => {
+          return (
+            <IonCard key={question._id} href={`/question/${question._id}`}>
+              <IonCardHeader>
+                <IonCardSubtitle>{question.creator.username}</IonCardSubtitle>
+                <IonCardTitle>{question.title}</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                {question.content.length > 150
+                  ? question.content.slice(0, 150) + "......"
+                  : question.content}
+              </IonCardContent>
+              <QuestionListCount
+                questionId={question._id}
+                questionLike={question.like.length}
+              />
+            </IonCard>
+          );
+        })
+      ) : (
+        <IonCard>
+          <IonCardContent>no posts found</IonCardContent>
+        </IonCard>
+      )}
     </>
   );
 };
