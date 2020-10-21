@@ -13,19 +13,12 @@ import TopicItem from "./topic-item";
 import { findTopic } from "../../controllers/topic";
 import { NavLink } from "react-router-dom";
 const TopicList = (props) => {
-  const [topicList, setTopicList] = useState([]);
+  const [topics, setTopics] = useState([]);
   useEffect(() => {
     findTopic(props.filter).then((data) => {
-      setTopicList(data);
+      setTopics(data);
     });
   }, [props.filter]);
-  if (topicList.length === 0) {
-    return (
-      <IonCard>
-        <IonCardContent>no topics found</IonCardContent>
-      </IonCard>
-    );
-  }
   return (
     <IonCard>
       <IonCardHeader>
@@ -38,11 +31,13 @@ const TopicList = (props) => {
               <IonLabel>全部</IonLabel>
             </IonItem>
           </NavLink>
-          {topicList.map((topic) => {
-            return (
-              <TopicItem key={topic._id} id={topic._id} name={topic.name} />
-            );
-          })}
+          {topics && topics.length > 0
+            ? topics.map((topic) => {
+                return (
+                  <TopicItem key={topic._id} id={topic._id} name={topic.name} />
+                );
+              })
+            : "Loading..."}
         </IonList>
         <NavLink to="/new/topic">
           <IonButton fill="clear">新建话题</IonButton>
