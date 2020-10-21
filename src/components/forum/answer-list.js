@@ -18,7 +18,7 @@ const AnwserList = (props) => {
       <IonItemDivider>
         <IonLabel>{answerList.length}个回复：</IonLabel>
       </IonItemDivider>
-      {answerList.map((answer) => {
+      {answerList && answerList.map((answer) => {
         return <AnswerItem key={answer._id} answer={answer}/>;
       })}
     </>

@@ -17,7 +17,7 @@ const CommentList = (props) => {
       <IonGrid hidden={props.hidden}>
         <IonRow>
           <IonCol>
-            {commentList.map((comment) => {
+            {commentList && commentList.map((comment) => {
               return <CommentItem key={comment._id} comment={comment} />;
             })}
           </IonCol>

@@ -17,8 +17,8 @@ import {
   IonPage,
   IonBackButton,
   IonButtons,
+  IonTextarea,
 } from "@ionic/react";
-import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from "react";
 import { createQuestion } from "../../controllers/question";
 import { findTopic } from "../../controllers/topic";
@@ -29,7 +29,6 @@ import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 
 const QuestionNew = () => {
-  const history = useHistory();
   const [topicList, setTopicList] = useState([]);
   useEffect(() => {
     findTopic("all").then((data) => {
@@ -51,8 +50,7 @@ const QuestionNew = () => {
     data.append("new_topic", new_topic);
     createQuestion(data).then((res) => {
       if (res.status === "success") {
-        history.push('/forum');
-        // window.location.href = "/forum";
+        window.location.href = "/forum";
       }
       if (res.status === "fail") {
         alert(res.message);
@@ -104,12 +102,22 @@ const QuestionNew = () => {
                 ></IonInput>
               </IonItem>
               <br />
-              <MdEditor
-                value={content}
-                style={{ height: "500px" }}
-                renderHTML={(text) => mdParser.render(text)}
-                onChange={handleEditorChange}
-              />
+              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                <IonItem>
+                  <IonLabel position="floating">内容：</IonLabel>
+                  <IonTextarea
+                    rows={10}
+                    onIonChange={(e) => setContent(e.detail.value)}
+                  ></IonTextarea>
+                </IonItem>
+              ) : (
+                <MdEditor
+                  value={content}
+                  style={{ height: "500px" }}
+                  renderHTML={(text) => mdParser.render(text)}
+                  onChange={handleEditorChange}
+                />
+              )}
               <br />
               <IonItem>
                 <IonLabel>话题：</IonLabel>
@@ -120,13 +128,14 @@ const QuestionNew = () => {
                   onIonChange={(e) => setTopic(e.detail.value)}
                   name="topic"
                 >
-                  {topicList.map((topic) => {
-                    return (
-                      <IonSelectOption key={topic._id} value={topic._id}>
-                        {topic.name}
-                      </IonSelectOption>
-                    );
-                  })}
+                  {topicList &&
+                    topicList.map((topic) => {
+                      return (
+                        <IonSelectOption key={topic._id} value={topic._id}>
+                          {topic.name}
+                        </IonSelectOption>
+                      );
+                    })}
                 </IonSelect>
               </IonItem>
               <br />
@@ -143,8 +152,12 @@ const QuestionNew = () => {
                   #
                 </IonInput>
               </IonItem>
-              <br />
-              <IonButton onClick={onSubmit}>发布</IonButton>
+              <br /><br />
+              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                <IonButton expand="block" onClick={onSubmit}>发布</IonButton>
+              ) : (
+                <IonButton onClick={onSubmit}>发布</IonButton>
+              )}
             </IonCol>
           </IonRow>
         </IonGrid>

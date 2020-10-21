@@ -15,49 +15,51 @@ import {
   IonToolbar,
   IonTitle,
   IonPage,
+  IonBackButton,
+  IonButtons,
+  IonTextarea,
 } from "@ionic/react";
-import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
 import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { updateQuestion, findQuestionById } from "../../controllers/question";
 import { findTopic } from "../../controllers/topic";
+import { AuthContext } from "../../util/auth-context";
 import Header from "../../components/header";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 
 const QuestionUpdate = () => {
-  const auth = useContext(AuthContext);
   const questionId = useParams().id;
-  const [content, setContent] = useState("");
-  const [topicSelect, setTopicSelect] = useState([]);
   const [topicList, setTopicList] = useState([]);
-  const [title, setTitle] = useState("");
-  const [new_topic, setNewTopic] = useState("");
-
   useEffect(() => {
-    findTopic().then((data) => {
+    findTopic("all").then((data) => {
       setTopicList(data);
     });
   }, []);
+  const auth = useContext(AuthContext);
+  const [topic, setTopic] = useState([]);
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [new_topic, setNewTitle] = useState("");
 
   useEffect(() => {
     findQuestionById(questionId).then((data) => {
       setTitle(data.title);
-      setTopicSelect(data.topic);
+      setTopic(data.topic);
       setContent(data.content);
     });
   }, [questionId]);
 
   const onSubmit = () => {
     const data = new FormData();
+    data.append("topic", topic);
     data.append("title", title);
     data.append("content", content);
-    data.append("topicSelect", topicSelect);
     data.append("new_topic", new_topic);
     updateQuestion(questionId, data).then((res) => {
       if (res.status === "success") {
-        window.location.href = `/question/${questionId}`;
+        window.location.href = "/forum";
       }
       if (res.status === "fail") {
         alert(res.message);
@@ -69,6 +71,7 @@ const QuestionUpdate = () => {
   function handleEditorChange({ html, text }) {
     setContent(text);
   }
+
   return (
     <IonPage>
       <Header />
@@ -77,7 +80,10 @@ const QuestionUpdate = () => {
           hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
         >
           <IonToolbar>
-            <IonTitle>编辑帖子</IonTitle>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/forum" text="返回" />
+            </IonButtons>
+            <IonTitle>发帖</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonGrid>
@@ -92,7 +98,7 @@ const QuestionUpdate = () => {
               <IonCardHeader
                 hidden={auth.screenSize === "sm" || auth.screenSize === "xs"}
               >
-                <IonCardTitle>编辑帖子</IonCardTitle>
+                <IonCardTitle>发帖</IonCardTitle>
               </IonCardHeader>
               <IonItem>
                 <IonLabel position="floating">标题：</IonLabel>
@@ -106,29 +112,41 @@ const QuestionUpdate = () => {
                 ></IonInput>
               </IonItem>
               <br />
-              <MdEditor
-                value={content}
-                style={{ height: "500px" }}
-                renderHTML={(text) => mdParser.render(text)}
-                onChange={handleEditorChange}
-              />
+              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                <IonItem>
+                  <IonLabel position="floating">内容：</IonLabel>
+                  <IonTextarea
+                    rows={10}
+                    value={content}
+                    onIonChange={(e) => setContent(e.detail.value)}
+                  ></IonTextarea>
+                </IonItem>
+              ) : (
+                <MdEditor
+                  value={content}
+                  style={{ height: "500px" }}
+                  renderHTML={(text) => mdParser.render(text)}
+                  onChange={handleEditorChange}
+                />
+              )}
               <br />
               <IonItem>
                 <IonLabel>话题：</IonLabel>
                 <IonSelect
                   interface="alert"
-                  value={topicSelect}
+                  value={topic}
                   multiple={true}
-                  onIonChange={(e) => setTopicSelect(e.detail.value)}
+                  onIonChange={(e) => setTopic(e.detail.value)}
                   name="topic"
                 >
-                  {topicList.map((topic) => {
-                    return (
-                      <IonSelectOption key={topic._id} value={topic._id}>
-                        {topic.name}
-                      </IonSelectOption>
-                    );
-                  })}
+                  {topicList &&
+                    topicList.map((topic) => {
+                      return (
+                        <IonSelectOption key={topic._id} value={topic._id}>
+                          {topic.name}
+                        </IonSelectOption>
+                      );
+                    })}
                 </IonSelect>
               </IonItem>
               <br />
@@ -139,14 +157,21 @@ const QuestionUpdate = () => {
                   name="new_topic"
                   placeholder="话题一#话题二#话题三"
                   onIonChange={(e) => {
-                    setNewTopic(e.detail.value);
+                    setNewTitle(e.detail.value);
                   }}
                 >
                   #
                 </IonInput>
               </IonItem>
               <br />
-              <IonButton onClick={onSubmit}>发布</IonButton>
+              <br />
+              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                <IonButton expand="block" onClick={onSubmit}>
+                  发布
+                </IonButton>
+              ) : (
+                <IonButton onClick={onSubmit}>发布</IonButton>
+              )}
             </IonCol>
           </IonRow>
         </IonGrid>

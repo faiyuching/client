@@ -49,12 +49,12 @@ const AnswerItem = (props) => {
           >
             {answer.creator.username}
           </a>
+          <p>
+            {moment(answer.createdAt).format("L") +
+              "  " +
+              moment(answer.createdAt).format("LT")}
+          </p>
         </IonLabel>
-        <IonText slot="end" color="medium">
-          {moment(answer.createdAt).format("L") +
-            "  " +
-            moment(answer.createdAt).format("LT")}
-        </IonText>
       </IonItem>
       <IonItem lines="none">
         <IonText

@@ -37,12 +37,12 @@ const CommentItem = (props) => {
           >
             {comment.replyto.username}
           </a>
+          <p>
+            {moment(comment.createdAt).format("L") +
+              "  " +
+              moment(comment.createdAt).format("LT")}
+          </p>
         </IonLabel>
-        <IonText slot="end" color="medium">
-          {moment(comment.createdAt).format("L") +
-            "  " +
-            moment(comment.createdAt).format("LT")}
-        </IonText>
       </IonItem>
       <IonItem lines="none">
         <IonText
