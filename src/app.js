@@ -26,7 +26,6 @@ import Home from "./pages/home";
 import Forecast from "./pages/forecast";
 import Response from "./pages/response";
 import Product from "./pages/product";
-import Forum from "./pages/forum/forum";
 import Question from "./pages/forum/question";
 import QuestionNew from "./pages/forum/question-new";
 import QuestionUpdate from "./pages/forum/question-update";
@@ -113,7 +112,7 @@ function App() {
         <Route path="/forecast" component={Forecast} exact={true} />
         <Route path="/response" component={Response} exact={true} />
         <Route path="/product" component={Product} exact={true} />
-        <Route path="/forum" component={Forum} exact={true} />
+        <Route path="/forum" component={ForumRouter} exact={true} />
         <Route path="/contribute" component={Contribute} exact={true} />
         <Route path="/register" component={Register} exact={true} />
         <Route path="/question/:id" component={Question} exact={true} />
