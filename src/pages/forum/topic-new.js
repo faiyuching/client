@@ -44,7 +44,9 @@ const TopicNew = () => {
     <IonPage>
       <Header />
       <IonContent fullscreen>
-        <IonHeader hidden={auth.screenSize==="md" || auth.screenSize==="lg"}>
+        <IonHeader
+          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+        >
           <IonToolbar>
             <IonTitle>新建话题</IonTitle>
           </IonToolbar>
@@ -84,7 +86,13 @@ const TopicNew = () => {
                     ></IonTextarea>
                   </IonItem>
                   <br />
-                  <IonButton onClick={onSubmit}>提交</IonButton>
+                  {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                    <IonButton expand="block" onClick={onSubmit}>
+                      提交
+                    </IonButton>
+                  ) : (
+                    <IonButton onClick={onSubmit}>提交</IonButton>
+                  )}
                 </IonCardContent>
               </IonCard>
             </IonCol>

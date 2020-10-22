@@ -7,6 +7,9 @@ import {
   IonLabel,
   IonButton,
   IonMenuToggle,
+  IonGrid,
+  IonRow,
+  IonCol
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import TopicItem from "./forum/topic-item";
@@ -41,11 +44,17 @@ const Menu = () => {
               <IonLabel>no topics found</IonLabel>
             </IonItem>
           )}
-          <IonMenuToggle autoHide={true}>
-            <IonButton fill="clear" href={"/new/topic"}>
-              新建话题
-            </IonButton>
-          </IonMenuToggle>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonMenuToggle autoHide={true}>
+                  <IonButton expand="block" href={"/new/topic"}>
+                    新建话题
+                  </IonButton>
+                </IonMenuToggle>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
         </IonList>
       </IonContent>
     </IonMenu>
