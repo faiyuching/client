@@ -9,7 +9,6 @@ import {
   IonButton,
   IonIcon,
   IonText,
-  IonItemDivider,
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
@@ -102,9 +101,6 @@ const QuestionItem = (props) => {
           </IonButton>
         </IonButtons>
       </IonItem>
-      <IonItemDivider hidden={isHiddenReply}>
-        <IonLabel>回复：</IonLabel>
-      </IonItemDivider>
       <QuestionReply questionId={props.question_id} hidden={isHiddenReply} />
     </>
   );

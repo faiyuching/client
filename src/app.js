@@ -40,6 +40,7 @@ import Login from "./pages/user/login";
 import Register from "./pages/user/register";
 
 import getScreenSize from "./controllers/screen-size";
+import ForumRouter from "./pages/forum/forum-routers";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -63,7 +64,7 @@ function App() {
   auth.language = navigator.language;
   const deviceDetector = new DeviceDetector();
   auth.device = deviceDetector.parse(navigator.userAgent).os.name;
-  
+
   if (localStorage.token) {
     const jwt = jwtDecode(localStorage.token);
     if (jwt.exp * 1000 > Date.now()) {
@@ -87,7 +88,7 @@ function App() {
         <Route path="/forecast" component={Forecast} exact={true} />
         <Route path="/response" component={Response} exact={true} />
         <Route path="/product" component={Product} exact={true} />
-        <Route path="/forum" component={Forum} exact={true} />
+        <Route path="/forum" component={ForumRouter} exact={true} />
         <Route path="/contribute" component={Contribute} exact={true} />
         <Route path="/register" component={Register} exact={true} />
         <Route path="/question/:id" component={Question} exact={true} />
@@ -162,7 +163,7 @@ function App() {
           user: auth.user,
           screenSize: auth.screenSize,
           device: auth.device,
-          language: auth.language
+          language: auth.language,
         }}
       >
         <IonReactRouter>{screen}</IonReactRouter>

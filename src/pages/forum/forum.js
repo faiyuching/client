@@ -13,6 +13,7 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
+  IonMenuButton
 } from "@ionic/react";
 import { add } from "ionicons/icons";
 import React, { useContext } from "react";
@@ -34,7 +35,7 @@ const Forum = (props) => {
         >
           <IonToolbar>
             <IonButtons slot={auth.device === "iOS" ? "start" : "end"}>
-              <IonButton>话题</IonButton>
+              <IonMenuButton />
             </IonButtons>
             <IonTitle>论坛</IonTitle>
             <IonButtons slot="end">
@@ -77,7 +78,7 @@ const Forum = (props) => {
           slot="fixed"
           hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
         >
-          <IonFabButton routerLink={"/new/question"}>
+          <IonFabButton href={"/new/question"}>
             <IonIcon icon={add} />
           </IonFabButton>
         </IonFab>

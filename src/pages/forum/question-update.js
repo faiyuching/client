@@ -167,10 +167,10 @@ const QuestionUpdate = () => {
               <br />
               {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
                 <IonButton expand="block" onClick={onSubmit}>
-                  发布
+                  更新
                 </IonButton>
               ) : (
-                <IonButton onClick={onSubmit}>发布</IonButton>
+                <IonButton onClick={onSubmit}>更新</IonButton>
               )}
             </IonCol>
           </IonRow>

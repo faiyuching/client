@@ -1,5 +1,13 @@
 import React, { useState, useContext } from "react";
-import { IonButton, IonItem, IonGrid, IonRow, IonCol } from "@ionic/react";
+import {
+  IonButton,
+  IonItem,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonTextarea,
+  IonLabel,
+} from "@ionic/react";
 import { createAnswer } from "../../controllers/answer";
 import { AuthContext } from "../../util/auth-context";
 import MarkdownIt from "markdown-it";
@@ -32,12 +40,23 @@ const QuestionReply = (props) => {
     <IonGrid hidden={props.hidden}>
       <IonRow>
         <IonCol>
-          <MdEditor
-            value={content}
-            style={{ height: "300px" }}
-            renderHTML={(text) => mdParser.render(text)}
-            onChange={handleEditorChange}
-          />
+          {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+            <IonItem>
+              <IonLabel position="floating">回复：</IonLabel>
+              <IonTextarea
+                rows={10}
+                onIonChange={(e) => setContent(e.detail.value)}
+              ></IonTextarea>
+            </IonItem>
+          ) : (
+            <MdEditor
+              value={content}
+              placeholder="回复："
+              style={{ height: "300px" }}
+              renderHTML={(text) => mdParser.render(text)}
+              onChange={handleEditorChange}
+            />
+          )}
           <IonItem lines="none">
             <IonButton slot="end" onClick={onSubmit}>
               提交
