@@ -11,7 +11,7 @@ import {
   IonPage,
 } from "@ionic/react";
 import React, { useState, useEffect,useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import { useParams } from "react-router-dom";
 import { findUserById } from "../../controllers/user";
 import UserUpdatePicture from "../../components/user/user-update-picture";
@@ -22,7 +22,7 @@ import UserUpdatePassword from "../../components/user/user-update-password";
 import UserUpdateInfo from "../../components/user/user-update-info";
 import Header from "../../components/header";
 const UserUpdate = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const id = useParams().id;
   const [user, setUser] = useState({
     avatar: "",

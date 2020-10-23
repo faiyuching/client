@@ -23,7 +23,7 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { updateQuestion, findQuestionById } from "../../controllers/question";
 import { findTopic } from "../../controllers/topic";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import Header from "../../components/header";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
@@ -37,7 +37,7 @@ const QuestionUpdate = () => {
       setTopicList(data);
     });
   }, []);
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [topic, setTopic] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -77,7 +77,7 @@ const QuestionUpdate = () => {
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonButtons slot="start">
@@ -96,7 +96,7 @@ const QuestionUpdate = () => {
               style={{ margin: "0 auto" }}
             >
               <IonCardHeader
-                hidden={auth.screenSize === "sm" || auth.screenSize === "xs"}
+                hidden={auth.screenSize === "sm"}
               >
                 <IonCardTitle>发帖</IonCardTitle>
               </IonCardHeader>
@@ -112,7 +112,7 @@ const QuestionUpdate = () => {
                 ></IonInput>
               </IonItem>
               <br />
-              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+              {auth.screenSize === "sm" ? (
                 <IonItem>
                   <IonLabel position="floating">内容：</IonLabel>
                   <IonTextarea
@@ -165,7 +165,7 @@ const QuestionUpdate = () => {
               </IonItem>
               <br />
               <br />
-              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+              {auth.screenSize === "sm" ? (
                 <IonButton expand="block" onClick={onSubmit}>
                   更新
                 </IonButton>

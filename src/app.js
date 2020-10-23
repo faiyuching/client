@@ -18,7 +18,7 @@ import {
   chatbubblesOutline,
 } from "ionicons/icons";
 
-import { AuthContext } from "./util/auth-context";
+import { Contexts } from "./util/contexts";
 import jwtDecode from "jwt-decode";
 import DeviceDetector from "device-detector-js";
 
@@ -58,7 +58,7 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 function App() {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   auth.screenSize = getScreenSize(document.documentElement.clientWidth);
   auth.language = navigator.language;
   const deviceDetector = new DeviceDetector();
@@ -122,7 +122,7 @@ function App() {
     );
   }
   let screen;
-  if (auth.screenSize === "xs" || auth.screenSize === "sm") {
+  if (auth.screenSize === "sm") {
     screen = (
       <IonTabs>
         <IonRouterOutlet>{routes}</IonRouterOutlet>
@@ -150,13 +150,13 @@ function App() {
         </IonTabBar>
       </IonTabs>
     );
-  } else if (auth.screenSize === "md" || auth.screenSize === "lg") {
+  } else if (auth.screenSize === "lg") {
     screen = <IonRouterOutlet>{routes}</IonRouterOutlet>;
   }
 
   return (
     <IonApp>
-      <AuthContext.Provider
+      <Contexts.Provider
         value={{
           isLoggedIn: auth.isLoggedIn,
           user: auth.user,
@@ -166,7 +166,7 @@ function App() {
         }}
       >
         <IonReactRouter>{screen}</IonReactRouter>
-      </AuthContext.Provider>
+      </Contexts.Provider>
     </IonApp>
   );
 }

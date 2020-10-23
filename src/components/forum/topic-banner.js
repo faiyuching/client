@@ -10,9 +10,9 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState, useContext } from "react";
 import { findTopicById } from "../../controllers/topic";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 const TopicBanner = (props) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [topicItem, setTopicItem] = useState({
     _id: "",
     creator: "",

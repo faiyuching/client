@@ -18,12 +18,12 @@ import {
   IonPage,
 } from "@ionic/react";
 import React, { useState,useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import { NavLink } from "react-router-dom";
 import { createUser } from "../../controllers/user";
 import Header from "../../components/header";
 const Register = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [username, setUsername] = useState("");
   const [telephone, setTelephone] = useState("");
   const [password, setPassword] = useState("");

@@ -15,14 +15,14 @@ import {
 import { pencilOutline } from "ionicons/icons";
 import Header from "../../components/header";
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import QuestionItem from "../../components/forum/question-item";
 import AnswerList from "../../components/forum/answer-list";
 import { findAnswer } from "../../controllers/answer";
 import QuestionDelete from "../../components/forum/question-delete";
 import { NavLink } from "react-router-dom";
 const Question = (props) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [answerCount, setAnswerCount] = useState(0);
   useEffect(() => {
     findAnswer("question", props.match.params.id).then((data) => {
@@ -34,7 +34,7 @@ const Question = (props) => {
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonButtons slot="start">

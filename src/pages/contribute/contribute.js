@@ -6,18 +6,18 @@ import {
   IonPage,
 } from "@ionic/react";
 import React, { useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import Developing from "../../components/developing";
 import Header from "../../components/header";
 
 const Contribute = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   return (
     <IonPage>
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonTitle>参与贡献</IonTitle>

@@ -19,13 +19,13 @@ import {
   IonPage,
 } from "@ionic/react";
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import { useParams } from "react-router-dom";
 import { findTopicById, updateTopic } from "../../controllers/topic";
 import TopicDelete from "../../components/forum/topic-delete";
 import Header from "../../components/header";
 const TopicNew = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const topicId = useParams().id;
   const [creatorId, setCreatorId] = useState("");
   const [topicName, setTopicName] = useState("");
@@ -59,7 +59,7 @@ const TopicNew = () => {
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonTitle>编辑话题</IonTitle>
@@ -107,7 +107,7 @@ const TopicNew = () => {
                       <TopicDelete topicId={topicId} creatorId={creatorId} />
                     </IonButtons>
                   </IonItem>
-                  {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                  {auth.screenSize === "sm" ? (
                     <IonButton expand="block" onClick={onSubmit}>
                       提交
                     </IonButton>

@@ -19,10 +19,10 @@ import {
 } from "@ionic/react";
 import React, { useContext, useState } from "react";
 import { createTopic } from "../../controllers/topic";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import Header from "../../components/header";
 const TopicNew = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [topicName, setTopicName] = useState("");
   const [topicDescription, setTopicDescription] = useState("");
   const onSubmit = () => {
@@ -45,7 +45,7 @@ const TopicNew = () => {
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonTitle>新建话题</IonTitle>
@@ -86,7 +86,7 @@ const TopicNew = () => {
                     ></IonTextarea>
                   </IonItem>
                   <br />
-                  {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+                  {auth.screenSize === "sm" ? (
                     <IonButton expand="block" onClick={onSubmit}>
                       提交
                     </IonButton>

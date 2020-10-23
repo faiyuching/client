@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { IonButton, IonIcon } from "@ionic/react";
 import { heartOutline } from "ionicons/icons";
 import { likeAnswer, unlikeAnswer } from "../../controllers/answer";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 const AnswerLike = (props) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const answer = props.answer;
   useEffect(() => {
     setLikeCount(answer.like.length);

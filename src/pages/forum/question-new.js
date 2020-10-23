@@ -22,7 +22,7 @@ import {
 import React, { useState, useEffect, useContext } from "react";
 import { createQuestion } from "../../controllers/question";
 import { findTopic } from "../../controllers/topic";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import Header from "../../components/header";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
@@ -35,7 +35,7 @@ const QuestionNew = () => {
       setTopicList(data);
     });
   }, []);
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [topic, setTopic] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -68,7 +68,7 @@ const QuestionNew = () => {
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonButtons slot="start">
@@ -87,7 +87,7 @@ const QuestionNew = () => {
               style={{ margin: "0 auto" }}
             >
               <IonCardHeader
-                hidden={auth.screenSize === "sm" || auth.screenSize === "xs"}
+                hidden={auth.screenSize === "sm"}
               >
                 <IonCardTitle>发帖</IonCardTitle>
               </IonCardHeader>
@@ -102,7 +102,7 @@ const QuestionNew = () => {
                 ></IonInput>
               </IonItem>
               <br />
-              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+              {auth.screenSize === "sm" ? (
                 <IonItem>
                   <IonLabel position="floating">内容：</IonLabel>
                   <IonTextarea
@@ -153,7 +153,7 @@ const QuestionNew = () => {
                 </IonInput>
               </IonItem>
               <br /><br />
-              {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+              {auth.screenSize === "sm" ? (
                 <IonButton expand="block" onClick={onSubmit}>发布</IonButton>
               ) : (
                 <IonButton onClick={onSubmit}>发布</IonButton>

@@ -1,13 +1,13 @@
 const getScreenSize = (width) => {
-  let size = "xs";
+  let size = "sm";
   if (width < 576) {
-    size = "xs";
+    size = "sm";
   }
   if (width >= 576 && width < 768) {
     size = "sm";
   }
   if (width >= 768 && width < 992) {
-    size = "md";
+    size = "lg";
   }
   if (width >= 992) {
     size = "lg";

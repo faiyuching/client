@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import parse from "html-react-parser";
 import {
   IonAvatar,
@@ -22,7 +22,7 @@ import { NavLink } from "react-router-dom";
 import MarkdownIt from "markdown-it";
 const QuestionItem = (props) => {
   const mdParser = new MarkdownIt();
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [question, setQuestion] = useState({
     creator: {
       username: "",
@@ -64,7 +64,7 @@ const QuestionItem = (props) => {
           </p>
         </IonLabel>
         {auth.user._id === question.creator._id && (
-          <IonButtons slot="end" hidden={auth.screenSize === "xs" || auth.screenSize === "sm"}>
+          <IonButtons slot="end" hidden={auth.screenSize === "sm"}>
             <QuestionDelete questionId={question._id} />
             <NavLink to={`/update/question/${props.question_id}`}>
               <IonButton color="medium">

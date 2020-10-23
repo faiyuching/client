@@ -23,14 +23,14 @@ import UserItem from "../../components/user/user-item";
 import { findUserById } from "../../controllers/user";
 import { NavLink } from "react-router-dom";
 import UserFollow from "../../components/user/user-follow";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import UserList from "../../components/user/user-list";
 import { useParams } from "react-router-dom";
 import queryString from "query-string";
 const User = (props) => {
   const id = useParams().id;
   const type = queryString.parse(props.location.search).type;
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [user, setUser] = useState({
     _id: "",
     username: "",
@@ -45,30 +45,28 @@ const User = (props) => {
   });
   useEffect(() => {
     if (id !== undefined) {
-      console.log(1)
+      console.log(1);
       findUserById(props.match.params.id).then((data) => {
         setUser(data);
       });
     } else {
       if (auth.isLoggedIn) {
-        console.log(2)
+        console.log(2);
         findUserById(auth.user._id).then((data) => {
           setUser(data);
         });
       } else {
-        console.log(3)
+        console.log(3);
         window.location.href = "/login";
       }
     }
-  }, [props.match.params.id, auth.user._id,auth.isLoggedIn, id]);
+  }, [props.match.params.id, auth.user._id, auth.isLoggedIn, id]);
 
   return (
     <IonPage>
       <Header />
       <IonContent fullscreen>
-        <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
-        >
+        <IonHeader hidden={auth.screenSize === "lg"}>
           <IonToolbar>
             <IonTitle>个人主页</IonTitle>
             <IonButtons slot="end">
@@ -100,9 +98,7 @@ const User = (props) => {
                       <NavLink to={`/update/user/${auth.user._id}`}>
                         <IonButton
                           color="medium"
-                          hidden={
-                            auth.screenSize === "xs" || auth.screenSize === "sm"
-                          }
+                          hidden={auth.screenSize === "sm"}
                         >
                           编辑个人资料
                         </IonButton>

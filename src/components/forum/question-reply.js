@@ -9,14 +9,14 @@ import {
   IonLabel,
 } from "@ionic/react";
 import { createAnswer } from "../../controllers/answer";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 
 const QuestionReply = (props) => {
   const [content, setContent] = useState("");
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const onSubmit = () => {
     const data = new FormData();
     data.append("creator", auth.user._id);
@@ -40,7 +40,7 @@ const QuestionReply = (props) => {
     <IonGrid hidden={props.hidden}>
       <IonRow>
         <IonCol>
-          {auth.screenSize === "xs" || auth.screenSize === "sm" ? (
+          {auth.screenSize === "sm" ? (
             <IonItem>
               <IonLabel position="floating">回复：</IonLabel>
               <IonTextarea

@@ -9,10 +9,10 @@ import {
 } from "@ionic/react";
 import { trashOutline } from "ionicons/icons";
 import { deleteComment } from "../../controllers/comment";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 
 const CommentDelete = (props) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const comment = props.comment;
   const [showDelete, setShowDelete] = useState(false);
   const DeleteComment = () => {

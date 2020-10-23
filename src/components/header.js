@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import { logoGithub } from "ionicons/icons";
 import React, { useContext } from "react";
-import { AuthContext } from "../util/auth-context";
+import { Contexts } from "../util/contexts";
 import { NavLink } from "react-router-dom";
 
 const logout = () => {
@@ -17,7 +17,7 @@ const logout = () => {
 };
 
 const Header = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   return (
     <IonHeader hidden={auth.screenSize==="xs" || auth.screenSize==="sm"}>
       <IonToolbar>

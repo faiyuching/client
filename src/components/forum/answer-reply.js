@@ -9,10 +9,10 @@ import {
   IonCol,
 } from "@ionic/react";
 import { createComment } from "../../controllers/comment";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 
 const AnswerReply = (props) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const [content, setContent] = useState("");
 
   const onSubmit = () => {

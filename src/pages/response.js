@@ -7,12 +7,12 @@ import {
   IonPage,
 } from "@ionic/react";
 import React, { useContext } from "react";
-import { AuthContext } from "../util/auth-context";
+import { Contexts } from "../util/contexts";
 import Developing from "../components/developing";
 import Header from "../components/header";
 
 const Response = () => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   return (
     <IonPage>
       <Header />

@@ -17,21 +17,21 @@ import {
 } from "@ionic/react";
 import { add } from "ionicons/icons";
 import React, { useContext } from "react";
-import { AuthContext } from "../../util/auth-context";
+import { Contexts } from "../../util/contexts";
 import TopicList from "../../components/forum/topic-list";
 import QuestionList from "../../components/forum/question-list";
 import queryString from "query-string";
 import TopicBanner from "../../components/forum/topic-banner";
 import Header from "../../components/header";
 const Forum = (props) => {
-  const auth = useContext(AuthContext);
+  const auth = useContext(Contexts);
   const topic = queryString.parse(props.location.search).topic;
   return (
     <IonPage>
       <Header />
       <IonContent fullscreen>
         <IonHeader
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonToolbar>
             <IonButtons slot={auth.device === "iOS" ? "start" : "end"}>
@@ -51,7 +51,7 @@ const Forum = (props) => {
             <IonCol
               size-md="3"
               size-lg="3"
-              hidden={auth.screenSize === "xs" || auth.screenSize === "sm"}
+              hidden={auth.screenSize === "sm"}
             >
               <TopicList filter="all"/>
             </IonCol>
@@ -60,7 +60,7 @@ const Forum = (props) => {
               <QuestionList filter="topic" id={topic} />
             </IonCol>
             <IonCol
-              hidden={auth.screenSize === "xs" || auth.screenSize === "sm"}
+              hidden={auth.screenSize === "sm"}
             >
               <IonGrid>
                 <IonRow>
@@ -76,7 +76,7 @@ const Forum = (props) => {
           vertical="bottom"
           horizontal="end"
           slot="fixed"
-          hidden={auth.screenSize === "md" || auth.screenSize === "lg"}
+          hidden={auth.screenSize === "lg"}
         >
           <IonFabButton href={"/new/question"}>
             <IonIcon icon={add} />
