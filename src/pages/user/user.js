@@ -14,7 +14,7 @@ import {
   IonLabel,
   IonCard,
   IonSegment,
-  IonSegmentButton
+  IonSegmentButton,
 } from "@ionic/react";
 import Header from "../../components/header";
 import React, { useEffect, useState, useContext } from "react";
@@ -91,7 +91,7 @@ const User = (props) => {
                     <img src={user.avatar} alt="avatar" />
                   </IonAvatar>
                   <IonLabel>
-                    <h2 style={{ fontWeight: "bolder" }}>{user.username}</h2>
+                    <h1 style={{ fontWeight: "bolder" }}>{user.username}</h1>
                     <p>{user.introduction}</p>
                   </IonLabel>
                   {auth.user._id === user._id && (
