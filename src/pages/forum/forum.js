@@ -54,9 +54,9 @@ const Forum = (props) => {
               >
                 <IonList>
                   <IonListHeader>排序方式</IonListHeader>
-                  <IonItem routerLink={`?topic=${topic}&sort=time`}>按时间降序</IonItem>
-                  <IonItem routerLink={`?topic=${topic}&sort=hot`}>按热度降序</IonItem>
-                  <IonItem routerLink={`?topic=${topic}&sort=notice`}>仅查看关注</IonItem>
+                  <IonItem routerLink={`?topic=${topic}&sort=time`} onClick={(e) => setShowPopover(false)}>按时间降序</IonItem>
+                  <IonItem routerLink={`?topic=${topic}&sort=hot`} onClick={(e) => setShowPopover(false)}>按热度降序</IonItem>
+                  <IonItem routerLink={`?topic=${topic}&sort=notice`} onClick={(e) => setShowPopover(false)}>仅查看关注</IonItem>
                   <IonItem
                     button
                     lines="none"
