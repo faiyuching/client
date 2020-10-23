@@ -18,7 +18,7 @@ const TopicList = (props) => {
   return (
     <IonList>
       <IonListHeader>话题</IonListHeader>
-      <IonItem routerLink={"/forum"}>
+      <IonItem routerLink={"/forum"} detail={false}>
         <IonLabel>全部</IonLabel>
       </IonItem>
       {topics && topics.length > 0 ? (

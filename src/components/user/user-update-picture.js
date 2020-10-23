@@ -1,9 +1,4 @@
-import {
-  IonButton,
-  IonButtons,
-  IonCardTitle,
-  IonItem,
-} from "@ionic/react";
+import { IonButton, IonButtons, IonItem } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { updatePicture } from "../../controllers/user";
 const UserUpdatePicture = (props) => {
@@ -51,7 +46,6 @@ const UserUpdatePicture = (props) => {
         //   }}
       />
       <IonItem lines="none">
-        <IonCardTitle>编辑个人资料</IonCardTitle>
         <input
           type="file"
           onChange={pictureSelectedHandle}

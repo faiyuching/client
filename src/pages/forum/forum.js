@@ -61,6 +61,7 @@ const Forum = (props) => {
                     button
                     lines="none"
                     onClick={(e) => setShowPopover(false)}
+                    detail={false}
                   >
                     <IonText color="danger">取消</IonText>
                   </IonItem>

@@ -1,9 +1,5 @@
 import {
   IonAvatar,
-  IonCard,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonGrid,
   IonRow,
   IonCol,
@@ -15,6 +11,10 @@ import {
   IonToolbar,
   IonTitle,
   IonPage,
+  IonLabel,
+  IonCard,
+  IonSegment,
+  IonSegmentButton
 } from "@ionic/react";
 import Header from "../../components/header";
 import React, { useEffect, useState, useContext } from "react";
@@ -62,6 +62,7 @@ const User = (props) => {
     }
   }, [props.match.params.id, auth.user._id, auth.isLoggedIn, id]);
 
+  const [segmentValue, setSegmentValue] = useState("home")
   return (
     <IonPage>
       <Header />
@@ -70,7 +71,7 @@ const User = (props) => {
           <IonToolbar>
             <IonTitle>个人主页</IonTitle>
             <IonButtons slot="end">
-              <IonButton>编辑</IonButton>
+              <IonButton routerLink={`/update/user/${auth.user._id}`}>编辑</IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -81,18 +82,18 @@ const User = (props) => {
               size-sm="10"
               size-md="8"
               size-lg="6"
-              style={{ margin: "0 auto" }}
+              style={{ margin: "0 auto"}}
             >
               <IonCard>
                 <img src={user.picture} alt="background" width="100%" />
-                <IonItem>
-                  <IonAvatar>
+                <IonItem lines="none">
+                  <IonAvatar slot="start">
                     <img src={user.avatar} alt="avatar" />
                   </IonAvatar>
-                  <IonCardHeader>
-                    <IonCardTitle>{user.username}</IonCardTitle>
-                    <IonCardSubtitle>{user.introduction}</IonCardSubtitle>
-                  </IonCardHeader>
+                  <IonLabel>
+                    <h2 style={{ fontWeight: "bolder" }}>{user.username}</h2>
+                    <p>{user.introduction}</p>
+                  </IonLabel>
                   {auth.user._id === user._id && (
                     <IonButtons slot="end">
                       <NavLink to={`/update/user/${auth.user._id}`}>
@@ -106,27 +107,7 @@ const User = (props) => {
                     </IonButtons>
                   )}
                 </IonItem>
-                <IonItem>
-                  <IonButtons slot="start">
-                    <NavLink to={`/user/${user._id}?type=home`}>
-                      <IonButton
-                        color={
-                          type === "home" || type === undefined
-                            ? "primary"
-                            : "medium"
-                        }
-                      >
-                        资料
-                      </IonButton>
-                    </NavLink>
-                    <NavLink to={`/user/${user._id}?type=question`}>
-                      <IonButton
-                        color={type === "question" ? "primary" : "medium"}
-                      >
-                        帖子
-                      </IonButton>
-                    </NavLink>
-                  </IonButtons>
+                <IonItem lines="none">
                   <UserFollow
                     me={auth.user._id}
                     you={user._id}
@@ -135,6 +116,16 @@ const User = (props) => {
                     following={user.following.length}
                     followers={user.followers.length}
                   />
+                </IonItem>
+                <IonItem lines="none" routerLink={`/user/${user._id}?type=${segmentValue}`} detail={false}> 
+                  <IonSegment value={segmentValue} onIonChange={(e) => {setSegmentValue(e.detail.value)}}>
+                    <IonSegmentButton value="home">
+                      <IonLabel>资料</IonLabel>
+                    </IonSegmentButton>
+                    <IonSegmentButton value="question">
+                      <IonLabel>帖子</IonLabel>
+                    </IonSegmentButton>
+                  </IonSegment>
                 </IonItem>
               </IonCard>
               {(type === "home" || type === undefined) && (

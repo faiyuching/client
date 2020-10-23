@@ -27,7 +27,7 @@ const ForumMenu = () => {
         <IonList>
           <IonListHeader>话题</IonListHeader>
           <IonMenuToggle autoHide={true}>
-            <IonItem routerLink={"/forum"}>
+            <IonItem routerLink={"/forum"} detail={false}>
               <IonLabel>全部</IonLabel>
             </IonItem>
           </IonMenuToggle>

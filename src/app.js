@@ -25,7 +25,7 @@ import DeviceDetector from "device-detector-js";
 import Home from "./pages/home";
 import Forecast from "./pages/forecast";
 import Response from "./pages/response";
-import Product from "./pages/product";
+import Product from "./pages/product/product";
 import Question from "./pages/forum/question";
 import QuestionNew from "./pages/forum/question-new";
 import QuestionUpdate from "./pages/forum/question-update";

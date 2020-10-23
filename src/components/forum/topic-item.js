@@ -10,7 +10,7 @@ const TopicItem = (props) => {
     });
   });
   return (
-    <IonItem routerLink={`?topic=${props.id}`} lines="none">
+    <IonItem routerLink={`?topic=${props.id}`} lines="none" detail={false}>
       <IonLabel>{props.name}</IonLabel>
       <IonBadge color={setTopicColor(questionCount)}>{questionCount}</IonBadge>
     </IonItem>

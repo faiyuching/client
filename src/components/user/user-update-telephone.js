@@ -43,9 +43,9 @@ const UserUpdateTelephone = (props) => {
         }}
       ></IonInput>
       <IonButtons slot="end">
-        <IonButton color="medium" hidden={isSubmitHidden}>
+        {/* <IonButton color="medium" hidden={isSubmitHidden}>
           发送验证码
-        </IonButton>
+        </IonButton> */}
         <IonButton color="primary" onClick={onSubmit} hidden={isSubmitHidden}>
           保存
         </IonButton>

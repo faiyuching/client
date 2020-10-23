@@ -48,7 +48,7 @@ const UserFollow = (props) => {
   };
 
   return (
-    <IonButtons slot="end">
+    <IonButtons>
       <NavLink to={`/user/${props.you}?type=following`}>
         <IonButton color={props.type === "following" ? "primary" : "medium"}>
           关注了{props.following}

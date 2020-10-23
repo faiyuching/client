@@ -1,4 +1,11 @@
-import { IonAvatar, IonButton, IonButtons, IonList } from "@ionic/react";
+import {
+  IonAvatar,
+  IonButton,
+  IonButtons,
+  IonCol,
+  IonGrid,
+  IonRow,
+} from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { updateAvatar } from "../../controllers/user";
 const UserUpdateAvatar = (props) => {
@@ -36,39 +43,47 @@ const UserUpdateAvatar = (props) => {
     });
   };
   return (
-    <IonList>
-      <IonAvatar>
-        <img
-          src={avatarUrl}
-          alt="avatar"
-          //   onClick={() => {
-          //     document.getElementById("getFile").click();
-          //   }}
-        />
-      </IonAvatar>
-      <input
-        type="file"
-        onChange={avatarSelectedHandle}
-        style={{ display: "none" }}
-        id="getAvatar"
-        accept="image/*"
-      ></input>
-      <IonButtons>
-        <IonButton
-          color="medium"
-          onClick={() => {
-            document.getElementById("getAvatar").click();
-          }}
-        >
-          更换头像
-        </IonButton>
-      </IonButtons>
-      {!isUploadHidden && (
-        <IonButton onClick={avatarUploaddHandle} hidden={isUploadHidden}>
-          保存
-        </IonButton>
-      )}
-    </IonList>
+    <IonGrid>
+      <IonRow>
+        <IonCol size-xs="4" size-sm="4" size-md="12" size-lg="12">
+          <IonAvatar>
+            <img
+              src={avatarUrl}
+              alt="avatar"
+              //   onClick={() => {
+              //     document.getElementById("getFile").click();
+              //   }}
+            />
+          </IonAvatar>
+        </IonCol>
+        <IonCol size-xs="4" size-sm="4" size-md="12" size-lg="12">
+          <input
+            type="file"
+            onChange={avatarSelectedHandle}
+            style={{ display: "none" }}
+            id="getAvatar"
+            accept="image/*"
+          ></input>
+          <IonButtons>
+            <IonButton
+              color="medium"
+              onClick={() => {
+                document.getElementById("getAvatar").click();
+              }}
+            >
+              更换头像
+            </IonButton>
+          </IonButtons>
+        </IonCol>
+        <IonCol size-xs="4" size-sm="4" size-md="12" size-lg="12">
+          {!isUploadHidden && (
+            <IonButton onClick={avatarUploaddHandle} hidden={isUploadHidden}>
+              保存
+            </IonButton>
+          )}
+        </IonCol>
+      </IonRow>
+    </IonGrid>
   );
 };
 

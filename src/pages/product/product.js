@@ -7,9 +7,9 @@ import {
   IonPage,
 } from "@ionic/react";
 import React, { useContext } from "react";
-import { Contexts } from "../util/contexts";
-import Developing from "../components/developing";
-import Header from "../components/header";
+import { Contexts } from "../../util/contexts";
+import Developing from "../../components/developing";
+import Header from "../../components/header";
 const Product = () => {
   const auth = useContext(Contexts);
   return (

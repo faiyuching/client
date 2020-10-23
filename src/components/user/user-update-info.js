@@ -10,9 +10,11 @@ import {
   IonRow,
   IonCol,
 } from "@ionic/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Contexts } from "../../util/contexts"
 import { updateUser } from "../../controllers/user";
 const UserUpdateInfo = (props) => {
+  const auth = useContext(Contexts)
   const [introduction, setIntroduction] = useState("");
   const [city, setCity] = useState("");
   const [field, setField] = useState("");
@@ -26,13 +28,13 @@ const UserUpdateInfo = (props) => {
 
   const onSubmit = () => {
     const data = new FormData();
-    data.append("introduction", introduction||"");
-    data.append("city", city||"");
-    data.append("field", field||"");
-    data.append("skill", skill||"");
+    data.append("introduction", introduction || "");
+    data.append("city", city || "");
+    data.append("field", field || "");
+    data.append("skill", skill || "");
     updateUser(props.id, data).then((res) => {
       if (res.status === "success") {
-        window.location.href = `/user/${props.id}/home`;
+        window.location.href = `/user/${props.id}`;
       }
       if (res.status === "fail") {
         alert(res.message);
@@ -93,11 +95,13 @@ const UserUpdateInfo = (props) => {
                   ></IonInput>
                 </IonItem>
                 <br />
-                <IonItem lines="none">
-                  <IonButton onClick={onSubmit} size="default" slot="end">
-                    保存
-                  </IonButton>
-                </IonItem>
+                  {auth.screenSize === "sm" ? (
+                    <IonButton expand="block" onClick={onSubmit}>
+                      保存
+                    </IonButton>
+                  ) : (
+                    <IonButton onClick={onSubmit}>保存</IonButton>
+                  )}
               </IonList>
             </IonCol>
           </IonRow>

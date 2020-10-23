@@ -10,7 +10,7 @@ import {
   IonTitle,
   IonPage,
 } from "@ionic/react";
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Contexts } from "../../util/contexts";
 import { useParams } from "react-router-dom";
 import { findUserById } from "../../controllers/user";
@@ -44,7 +44,7 @@ const UserUpdate = () => {
     <IonPage>
       <Header />
       <IonContent fullscreen>
-        <IonHeader hidden={auth.screenSize==="md" || auth.screenSize==="lg"}>
+        <IonHeader hidden={auth.screenSize === "lg"}>
           <IonToolbar>
             <IonTitle>编辑资料</IonTitle>
           </IonToolbar>
@@ -63,10 +63,10 @@ const UserUpdate = () => {
                 <IonCardContent>
                   <IonGrid>
                     <IonRow>
-                      <IonCol size="2">
+                      <IonCol size-xs="12" size-sm="12" size-md="2" size-lg="2">
                         <UserUpdateAvatar id={id} avatar={user.avatar} />
                       </IonCol>
-                      <IonCol size="10">
+                      <IonCol size="12" size-sm="12" size-md="10" size-lg="10">
                         <UserUpdateUsername id={id} username={user.username} />
                         <UserUpdateTelephone
                           id={id}
