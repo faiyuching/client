@@ -24,23 +24,30 @@ const TopicBanner = (props) => {
     });
   });
   return (
-    <IonCard>
-      {/* <img src="/bg.png" alt="pic" width="100%" /> */}
-      <IonItem>
-        <IonCardHeader>
-          <IonCardSubtitle></IonCardSubtitle>
-          <IonCardTitle>{topicItem.name}</IonCardTitle>
-        </IonCardHeader>
-        {auth.user._id === topicItem.creator && (
-          <IonButtons slot="end">
-            <IonButton color="medium" href={`/update/topic/${topicItem._id}`}>
-              编辑话题
-            </IonButton>
-          </IonButtons>
-        )}
-      </IonItem>
-      <IonCardContent>{topicItem.description}</IonCardContent>
-    </IonCard>
+    <>
+      {topicItem && (
+        <IonCard>
+          {/* <img src="/bg.png" alt="pic" width="100%" /> */}
+          <IonItem>
+            <IonCardHeader>
+              <IonCardSubtitle></IonCardSubtitle>
+              <IonCardTitle>{topicItem.name}</IonCardTitle>
+            </IonCardHeader>
+            {auth.user._id === topicItem.creator && (
+              <IonButtons slot="end">
+                <IonButton
+                  color="medium"
+                  href={`/update/topic/${topicItem._id}`}
+                >
+                  编辑话题
+                </IonButton>
+              </IonButtons>
+            )}
+          </IonItem>
+          <IonCardContent>{topicItem.description}</IonCardContent>
+        </IonCard>
+      )}
+    </>
   );
 };
 

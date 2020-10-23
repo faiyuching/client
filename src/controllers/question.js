@@ -2,9 +2,9 @@ const axios = require('axios');
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.token}`;
 
-const findQuestion = (filter,id) => {
+const findQuestion = (filter,id,sort) => {
   return axios({
-    url: `/api/question?filter=${filter}&id=${id}`,
+    url: `/api/question?filter=${filter}&id=${id}&sort=${sort}`,
     method: "get",
   })
     .then((res) => {

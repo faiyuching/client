@@ -12,10 +12,10 @@ import QuestionListCount from "./question-list-count";
 const QuestionList = (props) => {
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
-    findQuestion(props.filter, props.id).then((data) => {
+    findQuestion(props.filter, props.id, props.sort).then((data) => {
       setQuestions(data);
     });
-  }, [props.filter, props.id]);
+  }, [props.filter, props.id, props.sort]);
   return (
     <>
       {questions && questions.length > 0 ? (

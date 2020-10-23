@@ -12,9 +12,9 @@ import {
   IonCol
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import TopicItem from "./forum/topic-item";
-import { findTopic } from "../controllers/topic";
-const Menu = () => {
+import TopicItem from "./topic-item";
+import { findTopic } from "../../controllers/topic";
+const ForumMenu = () => {
   const [topics, setTopics] = useState([]);
   useEffect(() => {
     findTopic("all").then((data) => {
@@ -34,8 +34,8 @@ const Menu = () => {
           {topics && topics.length > 0 ? (
             topics.map((topic) => {
               return (
-                <IonMenuToggle autoHide={true}>
-                  <TopicItem key={topic._id} id={topic._id} name={topic.name} />
+                <IonMenuToggle autoHide={true} key={topic._id}>
+                  <TopicItem id={topic._id} name={topic.name} />
                 </IonMenuToggle>
               );
             })
@@ -61,4 +61,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default ForumMenu;
