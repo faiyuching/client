@@ -5,6 +5,10 @@ import {
   IonTitle,
   IonSearchbar,
   IonPage,
+  IonGrid,
+  IonRow,
+  IonImg,
+  IonCol
 } from "@ionic/react";
 import React, { useContext } from "react";
 import { Contexts } from "../../util/contexts";
