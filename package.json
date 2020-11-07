@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://zhuoming-node-server:8000",
+  "proxy": "http://35.188.28.29",
   "secure": false,
   "dependencies": {
     "@ionic/react": "^5.3.4",
